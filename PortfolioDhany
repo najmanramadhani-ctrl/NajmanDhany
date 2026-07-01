@@ -1,0 +1,825 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dhany | Aesthetic Portfolio</title>
+    <!-- Premium & Cute Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            /* Aesthetic Pastel Palette: Lilac, White, Gold */
+            --bg-color: #FAFAFf;         
+            --surface-color: #ffffff;    
+            
+            --lilac-light: #E8DFF5;      
+            --lilac-main: #C8B6E2;       
+            --lilac-dark: #8E70B7;       
+            
+            --gold-light: #FDF7E7;       
+            --gold-main: #D4AF37;        
+            --gold-gradient: linear-gradient(135deg, #EAD58B, #D4AF37);
+            
+            /* Additional pastel accents for projects */
+            --peach-light: #FFE5D9;
+            --peach-main: #FFB5A7;
+            --mint-light: #D8F3DC;
+            --mint-main: #95D5B2;
+            
+            --text-primary: #4A3F55;     
+            --text-secondary: #7D6F88;   
+            
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-pill: 9999px;
+            
+            --shadow-soft: 0 8px 24px rgba(200, 182, 226, 0.2);
+            --shadow-gold: 0 10px 25px rgba(212, 175, 55, 0.25);
+            
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, #FFFFFF 0px, transparent 50%),
+                radial-gradient(at 100% 0%, var(--lilac-light) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, var(--gold-light) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--lilac-dark);
+        }
+
+        /* --- FLOATING NAVIGATION --- */
+        .nav-container {
+            position: fixed;
+            top: 24px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 1000;
+            padding: 0 20px;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 8px 12px;
+            border-radius: var(--radius-pill);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            border: 2px solid var(--lilac-light);
+            max-width: 100%;
+            overflow-x: auto;
+            scrollbar-width: none; /* Hide scrollbar for clean look */
+        }
+        
+        nav::-webkit-scrollbar { display: none; }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.3rem;
+            padding: 0 15px;
+            cursor: pointer;
+            color: var(--gold-main);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            font-family: 'Quicksand', sans-serif;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: var(--radius-pill);
+            transition: var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .nav-btn:hover {
+            background: var(--lilac-light);
+            color: var(--lilac-dark);
+        }
+
+        .nav-btn.active {
+            background: var(--lilac-main);
+            color: white;
+            box-shadow: 0 4px 12px rgba(200, 182, 226, 0.4);
+        }
+
+        /* --- MAIN LAYOUT --- */
+        main {
+            max-width: 1000px;
+            margin: 140px auto 60px auto;
+            padding: 0 24px;
+        }
+
+        .view-section {
+            display: none;
+            animation: fadeInSlide 0.5s ease forwards;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        @keyframes fadeInSlide {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 20%;
+            width: 60%;
+            height: 4px;
+            background: var(--gold-gradient);
+            border-radius: 4px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+
+        /* --- HOME VIEW --- */
+        .hero {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .profile-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--surface-color);
+            border: 2px solid var(--gold-main);
+            color: var(--gold-main);
+            padding: 8px 20px;
+            border-radius: var(--radius-pill);
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-gold);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.2;
+            font-weight: 800;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .hero h1 span {
+            color: var(--lilac-dark);
+            position: relative;
+        }
+
+        .hero p.bio {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 0 auto 50px auto;
+            font-weight: 500;
+        }
+
+        /* --- RESUME VIEW --- */
+        .timeline-item {
+            background: var(--surface-color);
+            padding: 35px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+            border: 2px solid var(--lilac-light);
+            position: relative;
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--lilac-main);
+            box-shadow: 0 15px 30px rgba(200, 182, 226, 0.3);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .job-title h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--lilac-dark);
+        }
+
+        .job-company {
+            color: var(--gold-main);
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .job-date {
+            background: var(--lilac-light);
+            color: var(--lilac-dark);
+            padding: 6px 16px;
+            border-radius: var(--radius-pill);
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .timeline-item ul {
+            padding-left: 20px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .timeline-item li {
+            margin-bottom: 10px;
+        }
+
+        .timeline-item li::marker {
+            color: var(--gold-main);
+        }
+
+        /* --- PROJECT VIEW (GRID) --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--surface-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            border: 2px solid var(--lilac-light);
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--lilac-main);
+            box-shadow: 0 15px 35px rgba(200, 182, 226, 0.35);
+        }
+
+        .project-image {
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+        }
+        
+        /* Pastel Backgrounds for Projects */
+        .bg-jiwa { background: var(--lilac-main); }
+        .bg-fitness { background: var(--mint-main); }
+        .bg-cafe { background: var(--peach-main); }
+
+        .project-image i {
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .project-image h3 {
+            font-size: 1.8rem;
+            color: white;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .project-content {
+            padding: 30px 25px;
+            flex-grow: 1;
+        }
+
+        .project-tag {
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: var(--radius-pill);
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .tag-jiwa { background: var(--lilac-light); color: var(--lilac-dark); }
+        .tag-fitness { background: var(--mint-light); color: #2D6A4F; }
+        .tag-cafe { background: var(--peach-light); color: #D46A6A; }
+
+        .project-content p {
+            color: var(--text-primary);
+            font-size: 1.05rem;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        /* --- CONTACT VIEW --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .contact-card {
+            background: var(--surface-color);
+            border-radius: var(--radius-lg);
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            border: 2px solid var(--lilac-light);
+            transition: var(--transition);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold-main);
+            box-shadow: var(--shadow-gold);
+            background: var(--gold-light);
+        }
+
+        .contact-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--lilac-light);
+            color: var(--lilac-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .contact-card:hover .contact-icon {
+            background: white;
+            color: var(--gold-main);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .contact-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .contact-card p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        /* --- CUTE VIDEO BUTTONS SECTION --- */
+        .video-category {
+            margin-bottom: 60px;
+        }
+
+        .video-category h3 {
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--lilac-dark);
+            font-weight: 800;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .aesthetic-btn {
+            text-decoration: none;
+            padding: 20px 25px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .aesthetic-btn:hover {
+            transform: translateY(-6px) scale(1.02);
+        }
+
+        .btn-content {
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+        }
+
+        .btn-subtitle {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .btn-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+
+        .aesthetic-btn:hover .btn-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Button Styles */
+        .style-lilac {
+            background: var(--lilac-main); color: white;
+            box-shadow: 0 8px 20px rgba(200, 182, 226, 0.4); border: 2px solid transparent;
+        }
+        .style-lilac .btn-icon { background: white; color: var(--lilac-main); }
+        .style-lilac:hover { box-shadow: 0 12px 25px rgba(200, 182, 226, 0.6); border-color: var(--gold-main); }
+
+        .style-white {
+            background: var(--surface-color); color: var(--text-primary);
+            border: 2px solid var(--gold-main); box-shadow: var(--shadow-gold);
+        }
+        .style-white .btn-icon { background: var(--gold-main); color: white; }
+        .style-white:hover { box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3); background: var(--gold-light); }
+
+        .style-gold {
+            background: var(--gold-gradient); color: white;
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3); border: 2px solid transparent;
+        }
+        .style-gold .btn-icon { background: white; color: var(--gold-main); }
+        .style-gold:hover { box-shadow: 0 12px 25px rgba(212, 175, 55, 0.5); border-color: white; }
+
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .nav-container { padding: 0 10px; }
+            .nav-btn { padding: 8px 14px; font-size: 0.9rem; }
+            .logo { display: none; } 
+            .job-header { flex-direction: column; }
+            .video-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- FLOATING NAVIGATION -->
+    <div class="nav-container">
+        <nav>
+            <div class="logo"><i data-lucide="sparkles" size="20"></i> Dhany</div>
+            <button class="nav-btn active" onclick="switchView('home')" id="btn-home">Home</button>
+            <button class="nav-btn" onclick="switchView('resume')" id="btn-resume">Experience</button>
+            <button class="nav-btn" onclick="switchView('videos')" id="btn-videos">Videos</button>
+            <button class="nav-btn" onclick="switchView('project')" id="btn-project">Projects</button>
+            <button class="nav-btn" onclick="switchView('contact')" id="btn-contact">Contact</button>
+        </nav>
+    </div>
+
+    <main>
+        <!-- 1. HOME SECTION -->
+        <section id="view-home" class="view-section active">
+            <div class="hero">
+                <div class="profile-badge">
+                    <i data-lucide="star" size="16"></i> Content Manager & Strategist
+                </div>
+                <h1>Creative Vision.<br><span>Aesthetic Execution.</span></h1>
+                <p class="bio">Hi, I'm Najman Ramadhani! I specialize in digital content creation, live hosting, video production, and social media strategy. Based in Kuala Lumpur, I love turning creative ideas into beautiful, engaging realities.</p>
+                
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                    <button class="aesthetic-btn style-lilac" onclick="switchView('videos')" style="border-radius: var(--radius-pill); padding: 15px 30px;">
+                        <div class="btn-icon" style="width: 35px; height: 35px;"><i data-lucide="play" size="18"></i></div>
+                        View My Videos
+                    </button>
+                    <button class="aesthetic-btn style-white" onclick="switchView('contact')" style="border-radius: var(--radius-pill); padding: 15px 30px;">
+                        <div class="btn-icon" style="width: 35px; height: 35px;"><i data-lucide="mail" size="18"></i></div>
+                        Get in Touch
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. RESUME SECTION -->
+        <section id="view-resume" class="view-section">
+            <div class="section-header">
+                <h2>My Journey</h2>
+                <p>Professional experience in content creation and management.</p>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="job-header">
+                    <div class="job-title">
+                        <h3>Operation Specialist / Live Host Manager</h3>
+                        <span class="job-company"><i data-lucide="building-2" size="18"></i> Jiabeikang Sdn. Bhd.</span>
+                    </div>
+                    <span class="job-date">Mar 2025 – Dec 2025</span>
+                </div>
+                <ul>
+                    <li>Trained and guided new live hosts to deliver confident, engaging product presentations.</li>
+                    <li>Oversaw live stream sessions, monitored host performance, and provided real-time feedback.</li>
+                    <li>Developed strategies to enhance live session effectiveness, increasing viewer retention and sales conversion.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="job-header">
+                    <div class="job-title">
+                        <h3>Content Manager</h3>
+                        <span class="job-company"><i data-lucide="building-2" size="18"></i> Catwalk Malaysia Sdn. Bhd.</span>
+                    </div>
+                    <span class="job-date">Feb 2024 – Mar 2025</span>
+                </div>
+                <ul>
+                    <li>Strategized and produced over 200 videos in 5 months, increasing 3 TikTok accounts' followers by 300%.</li>
+                    <li>Acted as backup live host, driving up to a 250% sales increase in a single month.</li>
+                    <li>Managed end-to-end video production including backdrop setup, video shooting, editing, and sound design.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="job-header">
+                    <div class="job-title">
+                        <h3>Executive Admin & Podcast Host</h3>
+                        <span class="job-company"><i data-lucide="building-2" size="18"></i> Oil and Gas Meta</span>
+                    </div>
+                    <span class="job-date">Jul 2023 – Feb 2024</span>
+                </div>
+                <ul>
+                    <li>Spearheaded podcast production, navigating technical setups and ensuring captivating content delivery.</li>
+                    <li>Captivated audiences as a podcast and class host, blending technical expertise with presentation skills.</li>
+                </ul>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="job-header">
+                    <div class="job-title">
+                        <h3>Kindergarten Teacher (Contract)</h3>
+                        <span class="job-company"><i data-lucide="building-2" size="18"></i> Kinder Kaizen</span>
+                    </div>
+                    <span class="job-date">Apr 2023 – Jul 2023</span>
+                </div>
+                <ul>
+                    <li>Designed vibrant activities that sparked joy and nurtured growth in both indoor and outdoor settings.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 3. PROJECT SECTION -->
+        <section id="view-project" class="view-section">
+            <div class="section-header">
+                <h2>My Projects</h2>
+                <p>A collection of my independent creations and ideas.</p>
+            </div>
+
+            <div class="project-grid">
+                <!-- Project 1: Jiwa App -->
+                <div class="project-card">
+                    <div class="project-image bg-jiwa">
+                        <i data-lucide="smartphone" size="48"></i>
+                        <h3>Jiwa App</h3>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-tag tag-jiwa">Active App</span>
+                        <p>A fully functioning mobile application I independently developed. It pushes the boundaries of digital content by integrating cutting-edge AI technology, AI-generated music, and automated branding to create a personalized, immersive environment.</p>
+                    </div>
+                </div>
+
+                <!-- Project 2: Fitness App -->
+                <div class="project-card">
+                    <div class="project-image bg-fitness">
+                        <i data-lucide="activity" size="48"></i>
+                        <h3>Fitness App</h3>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-tag tag-fitness">In Development</span>
+                        <p>Currently building an innovative mobile application dedicated to health and fitness tracking. This project aims to provide users with seamless workout routines, progress monitoring, and a highly aesthetic user interface to keep motivation high.</p>
+                    </div>
+                </div>
+
+                <!-- Project 3: Cafe Hack -->
+                <div class="project-card">
+                    <div class="project-image bg-cafe">
+                        <i data-lucide="coffee" size="48"></i>
+                        <h3>Cafe Hack</h3>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-tag tag-cafe">Beverage Book</span>
+                        <p>A comprehensive book of beverages titled <strong>'Cafe Hack'</strong>. It features a curated collection of creative drink formulations, professional coffee techniques, and cafe-style beverage secrets designed for both enthusiasts and professionals.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. VIDEOS SECTION -->
+        <section id="view-videos" class="view-section">
+            <div class="section-header">
+                <h2>Video Portfolio</h2>
+                <p>Click any button below to watch the video directly on TikTok.</p>
+            </div>
+            
+            <div id="video-container">
+                <!-- Javascript will dynamically populate the aesthetic buttons here -->
+            </div>
+        </section>
+
+        <!-- 5. CONTACT SECTION -->
+        <section id="view-contact" class="view-section">
+            <div class="section-header">
+                <h2>Let's Connect!</h2>
+                <p>Feel free to reach out for collaborations, inquiries, or just to say hi.</p>
+            </div>
+
+            <div class="contact-grid">
+                <a href="mailto:najmanramadhani@gmail.com" class="contact-card">
+                    <div class="contact-icon">
+                        <i data-lucide="mail" size="32"></i>
+                    </div>
+                    <h3>Email Me</h3>
+                    <p>najmanramadhani@gmail.com</p>
+                </a>
+
+                <a href="tel:+60195059741" class="contact-card">
+                    <div class="contact-icon">
+                        <i data-lucide="phone-call" size="32"></i>
+                    </div>
+                    <h3>Call Me</h3>
+                    <p>+6019 5059741</p>
+                </a>
+
+                <div class="contact-card" style="cursor: default;">
+                    <div class="contact-icon">
+                        <i data-lucide="map-pin" size="32"></i>
+                    </div>
+                    <h3>Location</h3>
+                    <p>Kuala Lumpur, Malaysia</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // --- NAVIGATION LOGIC ---
+        function switchView(viewId) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            document.querySelectorAll('.view-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            setTimeout(() => {
+                document.getElementById('view-' + viewId).classList.add('active');
+                if(document.getElementById('btn-' + viewId)) {
+                    document.getElementById('btn-' + viewId).classList.add('active');
+                }
+            }, 50); 
+        }
+
+        // --- VIDEO DATA ---
+        const videoData = [
+            { category: "Posters & Promos", icon: "image", links: [
+                "https://vt.tiktok.com/ZSCDCes89/", "https://vt.tiktok.com/ZSCDC8drg/", "https://vt.tiktok.com/ZSCDC9WEK/"
+            ]},
+            { category: "CW Tech Showcase", icon: "monitor-play", links: [
+                "https://vt.tiktok.com/ZSmLAktaM/", "https://vt.tiktok.com/ZSmLAk6Fc/", "https://vt.tiktok.com/ZSmLSbUmh/",
+                "https://vt.tiktok.com/ZSmLSggFg/", "https://vt.tiktok.com/ZSmLSg8TR/", "https://vt.tiktok.com/ZSmLAfxTT/"
+            ]},
+            { category: "CW Variety Highlights", icon: "film", links: [
+                "https://vt.tiktok.com/ZSmLDyRwc/", "https://vt.tiktok.com/ZSmLDkM1X/", "https://vt.tiktok.com/ZSmLACaeP/",
+                "https://vt.tiktok.com/ZSmLD1aFJ/", "https://vt.tiktok.com/ZSmLAWhqX/", "https://vt.tiktok.com/ZSmLAKSNd/",
+                "https://vt.tiktok.com/ZSmLD8p12/", "https://vt.tiktok.com/ZSmLDMyMK/"
+            ]}
+        ];
+
+        // --- GENERATE AESTHETIC DIRECT LINK BUTTONS ---
+        const container = document.getElementById('video-container');
+        
+        const styles = ['style-lilac', 'style-white', 'style-gold'];
+        const buttonIcons = ['play', 'sparkles', 'heart', 'star'];
+
+        videoData.forEach((section) => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'video-category';
+            
+            const header = document.createElement('h3');
+            header.innerHTML = `<i data-lucide="${section.icon}" size="28" style="color: var(--gold-main);"></i> ${section.category}`;
+            wrapper.appendChild(header);
+
+            const grid = document.createElement('div');
+            grid.className = 'video-grid';
+
+            section.links.forEach((url, index) => {
+                const btn = document.createElement('a');
+                
+                const currentStyle = styles[index % styles.length];
+                const currentIcon = buttonIcons[index % buttonIcons.length];
+                
+                btn.className = `aesthetic-btn ${currentStyle}`;
+                btn.href = url;
+                btn.target = "_blank"; 
+                btn.rel = "noopener noreferrer"; 
+                
+                btn.innerHTML = `
+                    <div class="btn-icon">
+                        <i data-lucide="${currentIcon}" size="22"></i>
+                    </div>
+                    <div class="btn-content">
+                        <span>Video Part ${index + 1}</span>
+                        <span class="btn-subtitle">Watch on TikTok ↗</span>
+                    </div>
+                `;
+                
+                grid.appendChild(btn);
+            });
+
+            wrapper.appendChild(grid);
+            container.appendChild(wrapper);
+        });
+
+        // Re-initialize icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
+
+
+```
