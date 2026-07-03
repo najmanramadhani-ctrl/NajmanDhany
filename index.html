@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,12 +7,12 @@
     <!-- Premium & Cute Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Quicksand:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            /* Aesthetic Pastel Palette: Lilac, White, Gold */
+            /* Aesthetic Pastel Palette */
             --bg-color: #FAFAFf;         
             --surface-color: #ffffff;    
             
@@ -25,7 +24,6 @@
             --gold-main: #D4AF37;        
             --gold-gradient: linear-gradient(135deg, #EAD58B, #D4AF37);
             
-            /* Additional pastel accents for projects */
             --peach-light: #FFE5D9;
             --peach-main: #FFB5A7;
             --mint-light: #D8F3DC;
@@ -40,6 +38,7 @@
             
             --shadow-soft: 0 8px 24px rgba(200, 182, 226, 0.2);
             --shadow-gold: 0 10px 25px rgba(212, 175, 55, 0.25);
+            --shadow-glow: 0 0 20px rgba(200, 182, 226, 0.5);
             
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -94,7 +93,7 @@
             border: 2px solid var(--lilac-light);
             max-width: 100%;
             overflow-x: auto;
-            scrollbar-width: none; /* Hide scrollbar for clean look */
+            scrollbar-width: none;
         }
         
         nav::-webkit-scrollbar { display: none; }
@@ -231,14 +230,65 @@
             font-weight: 500;
         }
 
-        /* --- RESUME VIEW --- */
+        /* --- RESUME & DOWNLOAD VIEW --- */
+        .download-card {
+            background: linear-gradient(135deg, var(--lilac-main), var(--lilac-dark));
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow-glow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-card::after {
+            content: '✨';
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 2rem;
+            opacity: 0.5;
+        }
+
+        .download-card h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .download-btn {
+            background: white;
+            color: var(--lilac-dark);
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: var(--radius-pill);
+            font-weight: 800;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255,255,255,0.4);
+            color: var(--gold-main);
+        }
+
         .timeline-item {
             background: var(--surface-color);
             padding: 35px;
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-soft);
             border: 2px solid var(--lilac-light);
-            position: relative;
             margin-bottom: 30px;
             transition: var(--transition);
         }
@@ -289,15 +339,10 @@
             font-weight: 500;
         }
 
-        .timeline-item li {
-            margin-bottom: 10px;
-        }
+        .timeline-item li { margin-bottom: 10px; }
+        .timeline-item li::marker { color: var(--gold-main); }
 
-        .timeline-item li::marker {
-            color: var(--gold-main);
-        }
-
-        /* --- PROJECT VIEW (GRID) --- */
+        /* --- PROJECT VIEW --- */
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -328,49 +373,122 @@
             align-items: center;
             justify-content: center;
             color: white;
-            position: relative;
         }
         
-        /* Pastel Backgrounds for Projects */
         .bg-jiwa { background: var(--lilac-main); }
         .bg-fitness { background: var(--mint-main); }
         .bg-cafe { background: var(--peach-main); }
 
-        .project-image i {
-            margin-bottom: 15px;
-            opacity: 0.9;
-        }
-
-        .project-image h3 {
-            font-size: 1.8rem;
-            color: white;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .project-content {
-            padding: 30px 25px;
-            flex-grow: 1;
-        }
+        .project-image i { margin-bottom: 15px; opacity: 0.9; }
+        .project-image h3 { font-size: 1.8rem; color: white; text-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .project-content { padding: 30px 25px; flex-grow: 1; }
 
         .project-tag {
-            font-size: 0.85rem;
-            font-weight: 700;
-            padding: 6px 14px;
-            border-radius: var(--radius-pill);
-            display: inline-block;
-            margin-bottom: 15px;
+            font-size: 0.85rem; font-weight: 700; padding: 6px 14px;
+            border-radius: var(--radius-pill); display: inline-block; margin-bottom: 15px;
         }
-
         .tag-jiwa { background: var(--lilac-light); color: var(--lilac-dark); }
         .tag-fitness { background: var(--mint-light); color: #2D6A4F; }
         .tag-cafe { background: var(--peach-light); color: #D46A6A; }
 
-        .project-content p {
-            color: var(--text-primary);
-            font-size: 1.05rem;
-            font-weight: 500;
-            line-height: 1.6;
+        .project-content p { color: var(--text-primary); font-size: 1.05rem; font-weight: 500; }
+
+        /* --- CUTE VIDEO BUTTONS SECTION (REDESIGNED) --- */
+        .video-category { margin-bottom: 60px; }
+        .video-category h3 {
+            font-size: 1.6rem; margin-bottom: 25px; display: flex;
+            align-items: center; gap: 12px; color: var(--lilac-dark); font-weight: 800;
         }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        /* Bouncy Float Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .cute-video-btn {
+            text-decoration: none;
+            padding: 22px 25px;
+            border-radius: 30px; /* Extra round and cute */
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 800;
+            font-size: 1.15rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* bouncy transition */
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Stagger the animation so they don't all bounce at the exact same time */
+        .cute-video-btn:nth-child(even) { animation-delay: 1s; }
+        .cute-video-btn:nth-child(3n) { animation-delay: 2s; }
+
+        .cute-video-btn:hover {
+            animation-play-state: paused;
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .cute-btn-content {
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+        }
+
+        .cute-subtitle {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .cute-icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .cute-video-btn:hover .cute-icon-box {
+            transform: scale(1.15) rotate(10deg);
+        }
+
+        /* Cute Aesthetic Styles */
+        .cute-lilac {
+            background: var(--lilac-main); color: white;
+            box-shadow: 0 10px 25px rgba(200, 182, 226, 0.5);
+            border: 3px solid white;
+        }
+        .cute-lilac .cute-icon-box { background: white; color: var(--lilac-main); }
+        .cute-lilac:hover { box-shadow: 0 15px 35px rgba(200, 182, 226, 0.7); border-color: var(--gold-light); }
+
+        .cute-peach {
+            background: var(--peach-main); color: white;
+            border: 3px solid white; box-shadow: 0 10px 25px rgba(255, 181, 167, 0.5);
+        }
+        .cute-peach .cute-icon-box { background: white; color: var(--peach-main); }
+        .cute-peach:hover { box-shadow: 0 15px 35px rgba(255, 181, 167, 0.7); }
+
+        .cute-gold {
+            background: var(--gold-gradient); color: white;
+            border: 3px solid white; box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+        }
+        .cute-gold .cute-icon-box { background: white; color: var(--gold-main); }
+        .cute-gold:hover { box-shadow: 0 15px 35px rgba(212, 175, 55, 0.6); }
 
         /* --- CONTACT VIEW --- */
         .contact-grid {
@@ -392,152 +510,39 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
         }
 
         .contact-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--gold-main);
-            box-shadow: var(--shadow-gold);
-            background: var(--gold-light);
+            transform: translateY(-5px); border-color: var(--gold-main);
+            box-shadow: var(--shadow-gold); background: var(--gold-light);
         }
 
         .contact-icon {
-            width: 70px;
-            height: 70px;
-            background: var(--lilac-light);
-            color: var(--lilac-dark);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
+            width: 70px; height: 70px; background: var(--lilac-light);
+            color: var(--lilac-dark); border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; margin-bottom: 20px;
             transition: var(--transition);
         }
 
         .contact-card:hover .contact-icon {
-            background: white;
-            color: var(--gold-main);
-            transform: scale(1.1) rotate(5deg);
+            background: white; color: var(--gold-main); transform: scale(1.1) rotate(5deg);
         }
 
-        .contact-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-        }
+        .contact-card h3 { font-size: 1.3rem; margin-bottom: 10px; color: var(--text-primary); }
+        .contact-card p { font-size: 1.1rem; color: var(--text-secondary); font-weight: 600; }
 
-        .contact-card p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            font-weight: 600;
-        }
-
-        /* --- CUTE VIDEO BUTTONS SECTION --- */
-        .video-category {
-            margin-bottom: 60px;
-        }
-
-        .video-category h3 {
-            font-size: 1.6rem;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--lilac-dark);
-            font-weight: 800;
-        }
-
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .aesthetic-btn {
-            text-decoration: none;
-            padding: 20px 25px;
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .aesthetic-btn:hover {
-            transform: translateY(-6px) scale(1.02);
-        }
-
-        .btn-content {
-            display: flex;
-            flex-direction: column;
-            z-index: 2;
-        }
-
-        .btn-subtitle {
-            font-size: 0.85rem;
-            opacity: 0.8;
-            font-weight: 600;
-            margin-top: 2px;
-        }
-
-        .btn-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2;
-            flex-shrink: 0;
-            transition: var(--transition);
-        }
-
-        .aesthetic-btn:hover .btn-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        /* Button Styles */
-        .style-lilac {
-            background: var(--lilac-main); color: white;
-            box-shadow: 0 8px 20px rgba(200, 182, 226, 0.4); border: 2px solid transparent;
-        }
-        .style-lilac .btn-icon { background: white; color: var(--lilac-main); }
-        .style-lilac:hover { box-shadow: 0 12px 25px rgba(200, 182, 226, 0.6); border-color: var(--gold-main); }
-
-        .style-white {
-            background: var(--surface-color); color: var(--text-primary);
-            border: 2px solid var(--gold-main); box-shadow: var(--shadow-gold);
-        }
-        .style-white .btn-icon { background: var(--gold-main); color: white; }
-        .style-white:hover { box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3); background: var(--gold-light); }
-
-        .style-gold {
-            background: var(--gold-gradient); color: white;
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3); border: 2px solid transparent;
-        }
-        .style-gold .btn-icon { background: white; color: var(--gold-main); }
-        .style-gold:hover { box-shadow: 0 12px 25px rgba(212, 175, 55, 0.5); border-color: white; }
-
-        /* --- RESPONSIVE ADJUSTMENTS --- */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.8rem; }
             .nav-container { padding: 0 10px; }
             .nav-btn { padding: 8px 14px; font-size: 0.9rem; }
             .logo { display: none; } 
-            .job-header { flex-direction: column; }
             .video-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- FLOATING NAVIGATION -->
+    <!-- NAVIGATION -->
     <div class="nav-container">
         <nav>
             <div class="logo"><i data-lucide="sparkles" size="20"></i> Dhany</div>
@@ -550,7 +555,7 @@
     </div>
 
     <main>
-        <!-- 1. HOME SECTION -->
+        <!-- 1. HOME -->
         <section id="view-home" class="view-section active">
             <div class="hero">
                 <div class="profile-badge">
@@ -560,25 +565,35 @@
                 <p class="bio">Hi, I'm Najman Ramadhani! I specialize in digital content creation, live hosting, video production, and social media strategy. Based in Kuala Lumpur, I love turning creative ideas into beautiful, engaging realities.</p>
                 
                 <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                    <button class="aesthetic-btn style-lilac" onclick="switchView('videos')" style="border-radius: var(--radius-pill); padding: 15px 30px;">
-                        <div class="btn-icon" style="width: 35px; height: 35px;"><i data-lucide="play" size="18"></i></div>
+                    <button class="cute-video-btn cute-lilac" onclick="switchView('videos')" style="animation: none; padding: 15px 30px; border-radius: var(--radius-pill);">
+                        <div class="cute-icon-box" style="width: 35px; height: 35px;"><i data-lucide="play" size="18"></i></div>
                         View My Videos
                     </button>
-                    <button class="aesthetic-btn style-white" onclick="switchView('contact')" style="border-radius: var(--radius-pill); padding: 15px 30px;">
-                        <div class="btn-icon" style="width: 35px; height: 35px;"><i data-lucide="mail" size="18"></i></div>
-                        Get in Touch
+                    <button class="cute-video-btn cute-gold" onclick="switchView('resume')" style="animation: none; padding: 15px 30px; border-radius: var(--radius-pill);">
+                        <div class="cute-icon-box" style="width: 35px; height: 35px;"><i data-lucide="file-heart" size="18"></i></div>
+                        My Experience
                     </button>
                 </div>
             </div>
         </section>
 
-        <!-- 2. RESUME SECTION -->
+        <!-- 2. RESUME -->
         <section id="view-resume" class="view-section">
             <div class="section-header">
                 <h2>My Journey</h2>
                 <p>Professional experience in content creation and management.</p>
             </div>
             
+            <!-- DOWNLOAD RESUME CARD -->
+            <div class="download-card">
+                <h3>Want the full picture?</h3>
+                <p style="font-weight: 500; opacity: 0.9;">View and download my complete professional CV</p>
+                <!-- GOOGLE DRIVE LINK EMBEDDED HERE -->
+                <a href="https://drive.google.com/file/d/1OP6CdzKovdHStpgaABa7qkGbj-q_jicG/view?usp=drivesdk" target="_blank" class="download-btn">
+                    <i data-lucide="download-cloud" size="22"></i> View & Download Resume
+                </a>
+            </div>
+
             <div class="timeline-item">
                 <div class="job-header">
                     <div class="job-title">
@@ -637,7 +652,7 @@
             </div>
         </section>
 
-        <!-- 3. PROJECT SECTION -->
+        <!-- 3. PROJECTS -->
         <section id="view-project" class="view-section">
             <div class="section-header">
                 <h2>My Projects</h2>
@@ -645,7 +660,6 @@
             </div>
 
             <div class="project-grid">
-                <!-- Project 1: Jiwa App -->
                 <div class="project-card">
                     <div class="project-image bg-jiwa">
                         <i data-lucide="smartphone" size="48"></i>
@@ -657,7 +671,6 @@
                     </div>
                 </div>
 
-                <!-- Project 2: Fitness App -->
                 <div class="project-card">
                     <div class="project-image bg-fitness">
                         <i data-lucide="activity" size="48"></i>
@@ -669,7 +682,6 @@
                     </div>
                 </div>
 
-                <!-- Project 3: Cafe Hack -->
                 <div class="project-card">
                     <div class="project-image bg-cafe">
                         <i data-lucide="coffee" size="48"></i>
@@ -683,7 +695,7 @@
             </div>
         </section>
 
-        <!-- 4. VIDEOS SECTION -->
+        <!-- 4. VIDEOS (WITH NEW CUTE BUTTONS) -->
         <section id="view-videos" class="view-section">
             <div class="section-header">
                 <h2>Video Portfolio</h2>
@@ -691,11 +703,11 @@
             </div>
             
             <div id="video-container">
-                <!-- Javascript will dynamically populate the aesthetic buttons here -->
+                <!-- Javascript will dynamically populate the cute buttons here -->
             </div>
         </section>
 
-        <!-- 5. CONTACT SECTION -->
+        <!-- 5. CONTACT -->
         <section id="view-contact" class="view-section">
             <div class="section-header">
                 <h2>Let's Connect!</h2>
@@ -704,25 +716,17 @@
 
             <div class="contact-grid">
                 <a href="mailto:najmanramadhani@gmail.com" class="contact-card">
-                    <div class="contact-icon">
-                        <i data-lucide="mail" size="32"></i>
-                    </div>
+                    <div class="contact-icon"><i data-lucide="mail" size="32"></i></div>
                     <h3>Email Me</h3>
                     <p>najmanramadhani@gmail.com</p>
                 </a>
-
                 <a href="tel:+60195059741" class="contact-card">
-                    <div class="contact-icon">
-                        <i data-lucide="phone-call" size="32"></i>
-                    </div>
+                    <div class="contact-icon"><i data-lucide="phone-call" size="32"></i></div>
                     <h3>Call Me</h3>
                     <p>+6019 5059741</p>
                 </a>
-
                 <div class="contact-card" style="cursor: default;">
-                    <div class="contact-icon">
-                        <i data-lucide="map-pin" size="32"></i>
-                    </div>
+                    <div class="contact-icon"><i data-lucide="map-pin" size="32"></i></div>
                     <h3>Location</h3>
                     <p>Kuala Lumpur, Malaysia</p>
                 </div>
@@ -770,11 +774,12 @@
             ]}
         ];
 
-        // --- GENERATE AESTHETIC DIRECT LINK BUTTONS ---
+        // --- GENERATE CUTE BOUNCY BUTTONS ---
         const container = document.getElementById('video-container');
         
-        const styles = ['style-lilac', 'style-white', 'style-gold'];
-        const buttonIcons = ['play', 'sparkles', 'heart', 'star'];
+        // New super cute styles and fun icons!
+        const cuteStyles = ['cute-lilac', 'cute-peach', 'cute-gold'];
+        const cuteIcons = ['music', 'heart', 'sparkles', 'star', 'camera', 'video'];
 
         videoData.forEach((section) => {
             const wrapper = document.createElement('div');
@@ -790,21 +795,22 @@
             section.links.forEach((url, index) => {
                 const btn = document.createElement('a');
                 
-                const currentStyle = styles[index % styles.length];
-                const currentIcon = buttonIcons[index % buttonIcons.length];
+                // Randomize styles and icons for a fun, varied aesthetic
+                const currentStyle = cuteStyles[index % cuteStyles.length];
+                const currentIcon = cuteIcons[(index + section.category.length) % cuteIcons.length];
                 
-                btn.className = `aesthetic-btn ${currentStyle}`;
+                btn.className = `cute-video-btn ${currentStyle}`;
                 btn.href = url;
                 btn.target = "_blank"; 
                 btn.rel = "noopener noreferrer"; 
                 
                 btn.innerHTML = `
-                    <div class="btn-icon">
-                        <i data-lucide="${currentIcon}" size="22"></i>
+                    <div class="cute-icon-box">
+                        <i data-lucide="${currentIcon}" size="24"></i>
                     </div>
-                    <div class="btn-content">
-                        <span>Video Part ${index + 1}</span>
-                        <span class="btn-subtitle">Watch on TikTok ↗</span>
+                    <div class="cute-btn-content">
+                        <span>Video Clip ${index + 1}</span>
+                        <span class="cute-subtitle">Tap to watch! ✧</span>
                     </div>
                 `;
                 
@@ -820,6 +826,3 @@
     </script>
 </body>
 </html>
-
-
-```
